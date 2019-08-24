@@ -32,12 +32,7 @@ public class Exchange implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 3)
-    @Column(name = "CURRENCY")
-    private String currency;
-    @Column(name = "VALUEINSEK")
+    private String currency;    
     private Integer valueinsek;
 
     public Exchange() {

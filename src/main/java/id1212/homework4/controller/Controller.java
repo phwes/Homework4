@@ -5,6 +5,8 @@
  */
 package id1212.homework4.controller;
 
+import id1212.homework4.integration.DAO;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
@@ -12,7 +14,17 @@ import javax.ejb.Stateless;
  * @author philip
  */
 @Stateless
-public class controller {
+public class Controller {
+    @EJB
+    DAO dao;
+    
+    public int findValueInSek(String currency){
+        if(currency != null){
+            return dao.findValueInSek(currency);
+        }else{
+            return 0;
+        }
+    }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

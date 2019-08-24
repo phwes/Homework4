@@ -5,28 +5,50 @@
  */
 package id1212.homework4.view;
 
+import id1212.homework4.controller.Controller;
+import java.io.Serializable;
+import javax.ejb.EJB;
+import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.context.Conversation;
+import javax.inject.Inject;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 
 /**
  *
  * @author philip
+ * 
+ * A managed bean that handles the interaction with JSF 
  */
+
+//  TODO: add Conversation
+
 @Named(value = "manBean")
-@Dependent
-public class manBean {
+@ConversationScoped
+public class manBean implements Serializable{
+    @EJB
+    Controller controller;
     private String name;
     private Integer valueInSek;
-    /**
-     * Creates a new instance of manBean
-     */
-    public manBean() {
-    }
     
-private int fromValue;
+    @Inject
+    private Conversation conversation;
+  
+    private int fromValue;
     private String fromCurrency;
     private String toCurrency;
+    private int result = 0;
 
+    private void startConversation(){
+        if(conversation.isTransient()){
+            conversation.begin();
+        }
+    }
+    
+    private void stopConversation(){
+        if(!conversation.isTransient()){
+            conversation.end();
+        }
+    }
 
     public int getFromValue() {
         return fromValue;
@@ -53,11 +75,13 @@ private int fromValue;
     }
 
     public void conversion(){
+        startConversation();
+        result = controller.findValueInSek(toCurrency);
 
     }
 
     public int getResult(){
-        return 10;
+        return result;
     }
     
 }
