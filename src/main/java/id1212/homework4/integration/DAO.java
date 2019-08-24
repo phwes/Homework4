@@ -23,6 +23,4 @@ public class DAO {
         Exchange res = em.find(Exchange.class, currency);
         return res.getValueinsek();
     }
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 }

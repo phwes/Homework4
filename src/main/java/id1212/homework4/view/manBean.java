@@ -20,8 +20,6 @@ import javax.inject.Named;
  * A managed bean that handles the interaction with JSF 
  */
 
-//  TODO: add Conversation
-
 @Named(value = "manBean")
 @ConversationScoped
 public class manBean implements Serializable{
@@ -34,7 +32,7 @@ public class manBean implements Serializable{
     private int fromValue;
     private String fromCurrency;
     private String toCurrency;
-    private int result = 0;
+    private double result = 0.0;
 
     private void startConversation(){
         if(conversation.isTransient()){
@@ -42,12 +40,6 @@ public class manBean implements Serializable{
         }
     }
     
-    private void stopConversation(){
-        if(!conversation.isTransient()){
-            conversation.end();
-        }
-    }
-
     public int getFromValue() {
         return fromValue;
     }
@@ -74,13 +66,13 @@ public class manBean implements Serializable{
 
     public void conversion(){
         startConversation();
-        int toCurrVal = controller.findValueInSek(toCurrency);
-        int fromCurrVal = controller.findValueInSek(fromCurrency);
+        double toCurrVal = (double) controller.findValueInSek(toCurrency);
+        double fromCurrVal = (double) controller.findValueInSek(fromCurrency);
         
-        result = (fromValue*fromCurrVal)/toCurrVal;
+        result = ((double)fromValue*fromCurrVal)/toCurrVal;
     }
 
-    public int getResult(){
+    public double getResult(){
         return result;
     }
     
