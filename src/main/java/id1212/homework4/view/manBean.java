@@ -27,8 +27,6 @@ import javax.inject.Named;
 public class manBean implements Serializable{
     @EJB
     Controller controller;
-    private String name;
-    private Integer valueInSek;
     
     @Inject
     private Conversation conversation;
@@ -76,8 +74,10 @@ public class manBean implements Serializable{
 
     public void conversion(){
         startConversation();
-        result = controller.findValueInSek(toCurrency);
-
+        int toCurrVal = controller.findValueInSek(toCurrency);
+        int fromCurrVal = controller.findValueInSek(fromCurrency);
+        
+        result = (fromValue*fromCurrVal)/toCurrVal;
     }
 
     public int getResult(){
