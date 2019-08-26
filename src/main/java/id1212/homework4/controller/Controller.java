@@ -8,11 +8,14 @@ package id1212.homework4.controller;
 import id1212.homework4.integration.DAO;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 
 /**
  *
  * @author philip
  */
+@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
 public class Controller {
     @EJB
